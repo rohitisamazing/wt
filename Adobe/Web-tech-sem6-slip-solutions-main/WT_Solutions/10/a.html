@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Text Around Image</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+
+<img id="myImage" src="/data/ty12/Desktop/WT2/WT2/Assignment 3/image.jpeg  " alt="Sample Image">
+
+<script>
+    $(document).ready(function () {
+        $('#myImage').before('<p>This is the text before the image.</p>');
+	$('#myImage').after('<p>This is the text after the image.</p>');
+    });
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Select an Employee:</h2>
+    <select id="employee-select">
+        <option value="">Select an employee</option>
+        <!-- Options will be populated dynamically -->
+    </select>
+    <div id="employee-details">
+        <!-- Employee details will be displayed here -->
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Populate the select options with employee names
+            $.ajax({
+                url: 'get_employee_names.php',
+                dataType: 'json',
+                success: function(data) {
+                    var options = '';
+                    $.each(data, function(index, employee) {
+                        options += '<option value="' + employee.eno + '">' + employee.ename + '</option>';
+                    });
+                    $('#employee-select').html(options);
+                }
+            });
+
+            // Event listener for change in select option
+            $('#employee-select').change(function() {
+                var selectedEmployee = $(this).val();
+                if (selectedEmployee) {
+                    // AJAX request to get employee details based on selected eno
+                    $.ajax({
+                        url: 'get_employee_details.php',
+                        type: 'GET',
+                        data: { eno: selectedEmployee },
+                        dataType: 'json',
+                        success: function(data) {
+                            // Display employee details
+                            var details = 'Designation: ' + data.designation + '<br>';
+                            details += 'Salary: $' + data.salary.toFixed(2);
+                            $('#employee-details').html(details);
+                        },
+                        error: function() {
+                            $('#employee-details').html('Error retrieving employee details.');
+                        }
+                    });
+                } else {
+                    // Clear details if no employee selected
+                    $('#employee-details').empty();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Operations</title>
+</head>
+<body>
+    <h2>Number Operations</h2>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <label for="num">Enter a number:</label>
+        <input type="number" name="num" id="num" required>
+        <br><br>
+        <label for="op">Select an operation:</label>
+        <select name="op" id="op" required>
+            <option value="">--Select--</option>
+            <option value="fibonacci">Fibonacci Series</option>
+            <option value="sum_of_digits">Sum of Digits</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <?php
+    // Function to generate Fibonacci series
+    function fibonacci($num) {
+        $first = 0;
+        $second = 1;
+        $result = "";
+        for ($i = 0; $i < $num; $i++) {
+            $result .= $first . " ";
+            $third = $first + $second;
+            $first = $second;
+            $second = $third;
+        }
+        return $result;
+    }
+
+    // Function to find sum of digits
+    function sumOfDigits($num) {
+        $sum = 0;
+        while ($num > 0) {
+            $digit = $num % 10;
+            $sum += $digit;
+            $num = (int)($num / 10);
+        }
+        return $sum;
+    }
+
+    // Process form submission
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $num = $_POST["num"];
+        $op = $_POST["op"];
+        switch ($op) {
+            case "fibonacci":
+                $result = fibonacci($num);
+                echo "<p>The Fibonacci series of $num numbers is: $result</p>";
+                break;
+            case "sum_of_digits":
+                $result = sumOfDigits($num);
+                echo "<p>The sum of digits in $num is: $result</p>";
+                break;
+            default:
+                echo "<p>Invalid operation selected</p>";
+        }
+    }
+    ?>
+</body>
+</html>

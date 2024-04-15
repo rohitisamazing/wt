@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fibonacci Numbers</title>
+  <script>
+    function generateFibonacci() {
+      // Get the input value from the user
+      var input = document.getElementById("inputNumber").value;
+      var output = document.getElementById("output");
+      
+      // Validate input
+      if (input === "" || isNaN(input)) {
+        output.innerHTML = "Please enter a valid number.";
+        return;
+      }
+      
+      // Convert the input to a number
+      var n = parseInt(input);
+      // Create an array to store the Fibonacci sequence
+      var Fib = [];
+      // Calculate the Fibonacci sequence up to n
+      Fib[0] = 0;
+      Fib[1] = 1;
+      for (var i = 2; i <= n; i++) {
+        Fib[i] = Fib[i-1] + Fib[i-2];
+      }
+      // Display the Fibonacci sequence
+      output.innerHTML = "Fibonacci sequence up to " + n + ": " + Fib.join(", ");
+    }
+  </script>
+</head>
+<body>
+  <h1>Fibonacci Numbers</h1>
+  <p>Enter a number:</p>
+  <input type="text" id="inputNumber">
+  <button onclick="generateFibonacci()">Generate Fibonacci</button>
+  <p id="output"></p>
+</body>
+</html>

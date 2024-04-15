@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<title>Membership Form</title>
+</head>
+<body>
+
+<form id="membershipForm" onsubmit="return validateForm()">
+   
+<label for="username">Username:</label>
+<input type="text" id="username" name="username" required>
+
+<br>
+
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" required>
+
+<br>
+
+<input type="submit" value="Submit">
+</form>
+
+<script>
+    function validateForm() 
+	{
+	        // Get values from the form
+	        var username = document.getElementById('username').value;
+	        var password = document.getElementById('password').value;
+
+	        // Validate username
+	        if (username.length < 5) 
+		{
+		        alert('Username must be at least 5 characters long.');
+	            	return false;
+	        }
+
+	        // Validate password
+	        if (password.length < 8) 
+		{
+		        alert('Password must be at least 8 characters long.');
+	            	return false;
+	        }
+
+	        // Check for at least one uppercase letter, one lowercase letter, one special symbol, and one number
+	        if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password) || !/\d/.test(password)) 
+		{
+	                alert('Password must meet the criteria: at least one uppercase letter, one lowercase letter, one special symbol, and one number.');
+                	return false;
+        	}
+
+        	// Success message if validation passes
+        	alert('Valid username and password. Form submitted successfully!');
+
+        	// If all validations pass, return true to submit the form
+        	return true;
+    }
+</script>
+
+</body>
+</html>
+

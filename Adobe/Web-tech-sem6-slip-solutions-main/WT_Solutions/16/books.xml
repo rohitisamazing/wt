@@ -1,0 +1,15 @@
+<books>
+    <book>
+        <title>Book 1</title>
+        <author>Author 1</author>
+        <year>2020</year>
+        <price>10</price>
+    </book>
+    <book>
+        <title>Book 2</title>
+        <author>Author 2</author>
+        <year>2019</year>
+        <price>15</price>
+    </book>
+    <!-- Add more book entries as needed -->
+</books>
